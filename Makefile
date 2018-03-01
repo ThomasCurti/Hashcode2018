@@ -6,17 +6,17 @@ CFLAGS = -Wall -Wextra -std=c99 -O0 -g
 LDFLAGS =
 LDLIBS =
  
-OBJ = matrix.o pizza.o
+OBJ = matrix.o main.o ride.o
 DEP = ${OBJ:.o=.d}
  
-all: pizza
+all: main
  
-pizza: ${OBJ}
+main: ${OBJ}
  
 .PHONY: clean
  
 clean:
-	${RM} ${OBJ} ${DEP} pizza
+	${RM} ${OBJ} ${DEP} main
  
 -include ${DEP}
  

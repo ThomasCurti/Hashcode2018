@@ -1,33 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
  
-#include "matrix.h"
+#include "ride.h"
  
 int main()
 {
-  FILE * file = fopen("example.in","r");
+  FILE * file = fopen("a_example.in","r");
 
-  char r_s[5], c_s[5], l_s[5] , h_s[5];
+  char r_s[6], c_s[6], f_s[5] , n_s[5] , b_s[6] , t_s[10];
 
-  fscanf(file, "%s %s %s %s\n" , r_s , c_s , l_s , h_s);
+  fscanf(file, "%s %s %s %s %s %s\n" , r_s , c_s , f_s , n_s , b_s , t_s);
 
-  int Row = strtol(r_s , 0 , 10);
-  int Col = strtol(c_s , 0 , 10);
-  int Least = strtol(l_s , 0 , 10);
-  int High = strtol(h_s , 0 , 10);
+  unsigned long Row = strtol(r_s , 0 , 10);
+  unsigned long Col = strtol(c_s , 0 , 10);
+  unsigned long Fleet = strtol(f_s , 0 , 10);
+  unsigned long Nb = strtol(n_s , 0 , 10);
+  unsigned long Bonus = strtol(b_s,0,10);
+  unsigned long Time = strtol(t_s,0,10);
 
-  printf("%d\n", Row);
-  printf("%d\n", Col);
-  printf("%d\n", Least);
-  printf("%d\n", High);
+  Ride ** rides = malloc(sizeof(Ride*) * Nb);
 
-  matrix pizza = load_matrix(file,Row,Col);
-
-  print_matrix(pizza);
-
-  free_matrix(pizza);
+  for(unsigned long i = 0; i < Nb; i++)
+  {
+  	rides[i] = parseRide(file);  
+  	printRide(rides[i]);
+  }
 
   fclose(file); 
  
+  for(unsigned long i = 0; i < Nb; i++)
+  	free(rides[i]);
+
+  free(rides);
+
   return 0;
 }
