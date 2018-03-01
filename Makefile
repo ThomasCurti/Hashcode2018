@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -std=c99 -O0 -g
 LDFLAGS =
 LDLIBS =
  
-OBJ = matrix.o main.o ride.o list.o ride.o
+OBJ = matrix.o main.o ride.o list.o ride.o car.o
 DEP = ${OBJ:.o=.d}
  
 all: main

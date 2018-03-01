@@ -1,5 +1,6 @@
 #include "ride.h"
 #include "list.h"
+#include "car.h"
 
 Ride * parseRide(FILE * file)
 {
@@ -33,4 +34,40 @@ void printRide(Ride * ride)
 
 	printf("Begin at %lu - " , ride->earlierStart);
 	printf("End at%lu\n", ride->lastedFinish);
+}
+
+unsigned long assignRide(Ride * ride , Car ** cars , unsigned long Fleet , unsigned long step , unsigned long id)
+{
+	unsigned long min = 1000000000;
+
+	Car * car;
+
+	for(unsigned long i = 0; i < Fleet ; i++)
+	{
+		if(cars[i]->free == 0 && min > calculateDistanceToRide(cars[i] , ride))
+		{
+			min = calculateDistanceToRide(cars[i] , ride);
+			car = cars[i];
+		}
+	}
+
+	if(min < 1000000000)
+	{
+		car->free = 1;
+		
+		unsigned long steparrived = step + min;
+
+		if( steparrived < ride->earlierStart)
+			steparrived = ride->earlierStart;
+
+		car->end = steparrived + ride->distance;
+
+		car->rides[car->it] = id;
+		car->it ++;
+
+		car->x = ride->end.x;
+		car->y = ride->end.y;
+	}
+
+	return min;
 }

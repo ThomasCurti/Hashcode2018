@@ -25,6 +25,8 @@ typedef struct Ride
 
 } Ride ;
 
+struct Car;
+
 Ride * parseRide(FILE * file );
 
 void printRide(Ride * ride);
