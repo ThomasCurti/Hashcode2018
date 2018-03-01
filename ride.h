@@ -25,19 +25,8 @@ typedef struct Ride
 
 } Ride ;
 
-typedef struct Car {
-  unsigned long x;
-  unsigned long y;
-} Car;
-
 Ride * parseRide(FILE * file );
 
 void printRide(Ride * ride);
-
-void freeRide(Ride * ride);
-
-unsigned long  calculateDistanceToRide(Car * car, Ride * ride);
-
-void travel();
 
 #endif /* _MATRIX_H_ */
