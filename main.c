@@ -2,12 +2,13 @@
 #include <stdlib.h>
  
 #include "ride.h"
- 
+#include "list.h"
+
 int main()
 {
-  FILE * file = fopen("a_example.in","r");
+  FILE * file = fopen("e_high_bonus.in","r");
 
-  char r_s[6], c_s[6], f_s[5] , n_s[5] , b_s[6] , t_s[10];
+  char r_s[100], c_s[100], f_s[100] , n_s[100] , b_s[100] , t_s[100];
 
   fscanf(file, "%s %s %s %s %s %s\n" , r_s , c_s , f_s , n_s , b_s , t_s);
 
@@ -18,20 +19,26 @@ int main()
   unsigned long Bonus = strtol(b_s,0,10);
   unsigned long Time = strtol(t_s,0,10);
 
-  Ride ** rides = malloc(sizeof(Ride*) * Nb);
+  list * rides = malloc(sizeof(list));
+  
+  list_init(rides);
 
   for(unsigned long i = 0; i < Nb; i++)
   {
-  	rides[i] = parseRide(file);  
-  	printRide(rides[i]);
+  	list * elm = malloc(sizeof(list));
+  	
+  	elm->data = parseRide(file);
+
+  	list_insert(rides , elm);  
   }
 
-  fclose(file); 
- 
-  for(unsigned long i = 0; i < Nb; i++)
-  	free(rides[i]);
+  list_print(rides);
+
+  list_clear(rides);
 
   free(rides);
 
+  fclose(file); 
+ 
   return 0;
 }

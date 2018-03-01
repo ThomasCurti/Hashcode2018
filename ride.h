@@ -29,6 +29,5 @@ Ride * parseRide(FILE * file );
 
 void printRide(Ride * ride);
 
-void freeRide(Ride * ride);
  
 #endif /* _MATRIX_H_ */
